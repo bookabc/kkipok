@@ -1,722 +1,1184 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>SkyPulse Command Center · 多城市智能天气控制台</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #050816;
+      --panel: rgba(10, 13, 40, 0.96);
+      --panel-soft: rgba(20, 26, 66, 0.92);
+      --border: rgba(163, 181, 255, 0.32);
+      --accent: #7e8bff;
+      --accent2: #4fd4ff;
+      --accent3: #ffb86c;
+      --text: #f5f7ff;
+      --text-soft: rgba(214, 220, 255, 0.8);
+      --good: #4fd18a;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { height:100%; }
+    body {
+      font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 10% 0, #3b5bff 0, transparent 55%),
+        radial-gradient(circle at 90% 100%, #ff7f9a 0, transparent 55%),
+        radial-gradient(circle at 20% 100%, #42d3ff 0, transparent 55%),
+        linear-gradient(135deg, #050816 0%, #050816 30%, #020312 100%);
+      color:var(--text);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+    }
+    body.theme-night {
+      background:
+        radial-gradient(circle at 0 0, #1f2a5c 0, transparent 55%),
+        radial-gradient(circle at 100% 100%, #7e3d9a 0, transparent 55%),
+        linear-gradient(135deg, #020310 0%, #050816 60%, #020310 100%);
+    }
+    .app {
+      width:100%;
+      max-width:1280px;
+      border-radius:26px;
+      background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.02));
+      backdrop-filter:blur(22px);
+      -webkit-backdrop-filter:blur(22px);
+      padding:16px;
+      box-shadow:0 30px 80px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.06);
+      position:relative;
+      overflow:hidden;
+    }
+    .inner { position:relative; z-index:1; display:grid; grid-template-rows:auto minmax(0,1fr); gap:10px; }
+    .top {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+    }
+    .brand { display:flex; align-items:center; gap:12px; }
+    .orb {
+      width:38px; height:38px; border-radius:18px;
+      background:conic-gradient(from 210deg,#ffed90,#ff8c6b,#7c78ff,#30d4ff,#ffed90);
+      box-shadow:0 14px 35px rgba(0,0,0,.9);
+      position:relative; overflow:hidden;
+    }
+    .orb::after {
+      content:"";
+      position:absolute; inset:4px; border-radius:14px;
+      background:
+        radial-gradient(circle at 30% 0,rgba(255,255,255,0.9),transparent 60%),
+        radial-gradient(circle at 80% 90%,rgba(0,0,0,.7),transparent 60%);
+    }
+    .brand-meta { display:flex; flex-direction:column; gap:2px; }
+    .brand-title { font-weight:600; letter-spacing:.14em; font-size:.92rem; text-transform:uppercase; }
+    .brand-sub { font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--text-soft); }
+    .top-ctrl { display:flex; align-items:center; gap:10px; }
+    .tabs {
+      display:inline-flex; padding:3px; border-radius:999px;
+      background:rgba(3,5,28,.96); border:1px solid rgba(149,164,255,.5);
+      box-shadow:0 12px 26px rgba(0,0,0,.9);
+    }
+    .tab-btn {
+      border:none; background:transparent; color:var(--text-soft);
+      font-size:.78rem; padding:6px 11px; border-radius:999px;
+      display:inline-flex; align-items:center; gap:6px;
+      cursor:pointer; transition:all .2s ease;
+    }
+    .tab-btn span.icon { font-size:.85rem; }
+    .tab-btn.active {
+      background:linear-gradient(135deg,#7e8bff,#4fd4ff);
+      color:#050816;
+      box-shadow:0 12px 28px rgba(50,104,255,.95);
+    }
+    .unit-switch {
+      display:inline-flex; padding:3px; border-radius:999px;
+      background:rgba(8,12,44,.95); border:1px solid rgba(158,177,255,.5);
+    }
+    .unit-btn {
+      border:none; background:transparent; color:var(--text-soft);
+      font-size:.78rem; padding:4px 10px; border-radius:999px;
+      cursor:pointer; transition:all .2s ease;
+    }
+    .unit-btn.active {
+      background:rgba(244,248,255,.96); color:#050816;
+      box-shadow:0 10px 20px rgba(0,0,0,.85); font-weight:500;
+    }
+    .status-pill {
+      display:flex; align-items:center; gap:8px;
+      padding:5px 9px; border-radius:999px;
+      background:rgba(0,0,0,.38);
+      border:1px solid rgba(172,190,255,.26);
+      font-size:.75rem;
+    }
+    .status-dot {
+      width:9px; height:9px; border-radius:999px;
+      background:var(--good); box-shadow:0 0 14px rgba(79,209,138,.9);
+    }
+    /* layout */
+    .grid {
+      display:grid;
+      grid-template-columns:minmax(0,0.9fr) minmax(0,2.1fr) minmax(0,1.6fr);
+      gap:10px; margin-top:4px; min-height:0;
+    }
+    .city-rail {
+      border-radius:20px; padding:10px;
+      background:radial-gradient(circle at 0 0,rgba(255,255,255,.12),transparent 60%),var(--panel);
+      border:1px solid var(--border);
+      box-shadow:0 18px 50px rgba(0,0,0,.95);
+      display:flex; flex-direction:column; gap:8px;
+    }
+    .rail-title { font-size:.88rem; font-weight:500; }
+    .rail-caption { font-size:.74rem; color:var(--text-soft); }
+    .rail-list {
+      margin-top:4px; flex:1; display:flex; flex-direction:column;
+      gap:8px; overflow-y:auto; padding-right:4px;
+    }
+    .rail-list::-webkit-scrollbar { width:4px; }
+    .rail-list::-webkit-scrollbar-thumb { background:rgba(142,160,255,.8); border-radius:999px; }
+    .city-item {
+      text-align:left; border-radius:14px; padding:8px 9px;
+      border:1px solid rgba(152,172,255,.42);
+      background:rgba(9,14,50,.96);
+      box-shadow:0 12px 28px rgba(0,0,0,.85);
+      display:flex; flex-direction:column; gap:4px;
+      cursor:pointer; transition:all .2s ease;
+    }
+    .city-item.active {
+      background:linear-gradient(135deg,rgba(126,139,255,.9),rgba(79,212,255,.9));
+      color:#050816; border-color:rgba(255,255,255,.92);
+      box-shadow:0 16px 36px rgba(40,80,220,.95);
+    }
+    .city-head { display:flex; justify-content:space-between; font-size:.8rem; }
+    .city-name { font-weight:500; }
+    .city-badge {
+      font-size:.7rem; padding:2px 6px; border-radius:999px;
+      border:1px solid rgba(217,226,255,.9);
+      background:rgba(0,0,0,.08);
+    }
+    .city-meta { display:flex; justify-content:space-between; font-size:.74rem; }
+    .city-temp { font-weight:600; }
+    .city-sub { opacity:.9; }
+    .city-add {
+      margin-top:4px; border-radius:999px;
+      border:1px dashed rgba(174,192,255,.8);
+      background:rgba(6,10,42,.95);
+      color:var(--text-soft); font-size:.74rem;
+      padding:5px 8px; text-align:center;
+    }
+    /* center column */
+    .col-center { display:grid; grid-template-rows:auto minmax(0,1fr); gap:8px; }
+    .search-row {
+      display:grid; grid-template-columns:minmax(0,2fr) minmax(0,1.4fr); gap:8px;
+    }
+    .input-wrap { position:relative; }
+    .city-input {
+      width:100%; border-radius:999px; border:1px solid rgba(173,189,255,.5);
+      padding:9px 38px 9px 13px;
+      background:radial-gradient(circle at 0 0,rgba(255,255,255,.18),transparent 70%),rgba(5,10,36,.96);
+      color:var(--text); font-size:.88rem; outline:none;
+      box-shadow:0 14px 30px rgba(0,0,0,.8);
+    }
+    .city-input::placeholder { color:rgba(194,204,255,.76); }
+    .search-icon {
+      position:absolute; right:13px; top:50%; transform:translateY(-50%);
+      font-size:.9rem; opacity:.8;
+    }
+    .loc-card {
+      border-radius:17px; padding:9px 11px;
+      background:radial-gradient(circle at 0 0,rgba(255,255,255,.15),transparent 55%),
+                 radial-gradient(circle at 120% 0,rgba(80,195,255,.5),transparent 55%),
+                 rgba(6,11,42,.98);
+      border:1px solid rgba(164,195,255,.7);
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; box-shadow:0 16px 40px rgba(0,0,0,.9);
+      cursor:pointer;
+    }
+    .loc-main { font-size:.88rem; font-weight:500; }
+    .loc-sub { font-size:.76rem; color:var(--text-soft); }
+    .loc-pin {
+      width:22px; height:22px; border-radius:999px;
+      display:inline-flex; align-items:center; justify-content:center;
+      background:radial-gradient(circle at 30% 0,#fff1c1,#ff8b6b);
+      box-shadow:0 0 0 2px #050816; font-size:.78rem;
+    }
+    .hero {
+      margin-top:6px;
+      border-radius:20px; padding:15px 17px 13px;
+      background:
+        radial-gradient(circle at 0 0,rgba(255,255,255,.16),transparent 60%),
+        radial-gradient(circle at 110% 120%,rgba(132,189,255,.5),transparent 60%),
+        var(--panel);
+      border:1px solid rgba(173,193,255,.62);
+      box-shadow:0 24px 60px rgba(0,0,0,.95);
+      position:relative; overflow:hidden;
+    }
+    .hero-top { display:flex; justify-content:space-between; gap:10px; position:relative; z-index:1; }
+    .hero-meta { display:flex; flex-direction:column; gap:2px; }
+    .hero-city { font-size:1.12rem; font-weight:600; }
+    .hero-time { font-size:.78rem; color:var(--text-soft); }
+    .hero-badges { display:flex; flex-wrap:wrap; gap:6px; margin-top:5px; }
+    .pill {
+      border-radius:999px; padding:2px 8px;
+      font-size:.7rem; border:1px solid rgba(172,191,255,.6);
+      background:rgba(13,19,59,.96);
+      display:inline-flex; align-items:center; gap:4px;
+    }
+    .pill-dot {
+      width:7px; height:7px; border-radius:999px;
+      background:var(--accent2); box-shadow:0 0 10px rgba(79,212,255,.9);
+    }
+    .hero-main { margin-top:9px; display:flex; align-items:flex-end; gap:18px; position:relative; z-index:1; }
+    .hero-temp-wrap { display:flex; flex-direction:column; gap:2px; }
+    .hero-temp-line { display:flex; align-items:flex-start; gap:6px; }
+    .hero-temp { font-size:3.2rem; font-weight:600; line-height:1; }
+    .hero-unit { font-size:1.05rem; transform:translateY(3px); opacity:.86; }
+    .hero-cond { font-size:.88rem; color:var(--text-soft); }
+    .hero-feel { font-size:.78rem; color:var(--text-soft); }
+    .hero-visual { margin-left:auto; width:110px; height:110px; position:relative; }
+    .sun {
+      position:absolute; inset:0; border-radius:999px;
+      background:radial-gradient(circle at 30% 0,#fff9d7,#ffd16b,#ff9b59);
+      box-shadow:0 18px 45px rgba(255,155,89,.9);
+      transition:all .5s ease;
+    }
+    body.theme-night .sun {
+      background:radial-gradient(circle at 30% 0,#fefbff,#b0a4ff,#6b63ff);
+      box-shadow:0 18px 45px rgba(145,132,255,.9);
+    }
+    .sun-ring {
+      position:absolute; inset:16px; border-radius:999px;
+      border:1px dashed rgba(8,12,44,.6);
+      box-shadow:0 0 22px rgba(255,255,255,.08) inset;
+    }
+    .sun-cloud {
+      position:absolute; left:-8px; right:-4px; bottom:4px; height:36px;
+      border-radius:999px;
+      background:radial-gradient(circle at 20% 0,#ffffff,#dde5ff);
+      box-shadow:0 18px 40px rgba(2,4,18,.9);
+    }
+    .kpi-row {
+      margin-top:11px; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:7px;
+    }
+    .kpi {
+      border-radius:13px; padding:7px 8px;
+      background:rgba(7,10,40,.96);
+      border:1px solid rgba(153,172,255,.46);
+      font-size:.74rem; display:flex; flex-direction:column; gap:3px;
+    }
+    .kpi-label { color:var(--text-soft); font-size:.72rem; }
+    .kpi-main { display:flex; align-items:baseline; gap:4px; }
+    .kpi-val { font-weight:500; }
+    .kpi-sub { font-size:.7rem; color:var(--text-soft); }
+    /* lower center */
+    .lower {
+      display:grid; grid-template-columns:minmax(0,2.1fr) minmax(0,1.3fr); gap:8px; margin-top:6px;
+    }
+    .hourly {
+      border-radius:18px; padding:9px 11px 8px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      box-shadow:0 18px 44px rgba(0,0,0,.95);
+      display:flex; flex-direction:column;
+    }
+    .card-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:5px; }
+    .card-title { font-size:.9rem; font-weight:500; }
+    .card-cap { font-size:.76rem; color:var(--text-soft); }
+    .chip-row {
+      display:inline-flex; padding:3px; border-radius:999px;
+      background:rgba(14,20,60,.96);
+      border:1px solid rgba(155,175,255,.52);
+      gap:4px;
+    }
+    .chip {
+      border:none; background:transparent; color:var(--text-soft);
+      font-size:.74rem; padding:3px 8px; border-radius:999px;
+      cursor:pointer; transition:all .2s;
+    }
+    .chip.active {
+      background:rgba(129,145,255,.96); color:#050816;
+      box-shadow:0 10px 20px rgba(101,122,255,.9);
+    }
+    .hour-strip {
+      margin-top:6px; display:grid; grid-auto-flow:column; grid-auto-columns:minmax(70px,1fr);
+      gap:8px; overflow-x:auto; padding-bottom:4px;
+    }
+    .hour-strip::-webkit-scrollbar { height:4px; }
+    .hour-strip::-webkit-scrollbar-thumb { background:rgba(142,160,255,.8); border-radius:999px; }
+    .h-card {
+      border-radius:13px; padding:6px 7px 8px;
+      background:radial-gradient(circle at 0 0,rgba(255,255,255,.1),transparent 80%),rgba(10,15,50,.98);
+      border:1px solid rgba(159,178,255,.65);
+      font-size:.74rem; display:flex; flex-direction:column; gap:4px; min-height:86px;
+    }
+    .h-time { color:var(--text-soft); }
+    .h-temp { font-weight:500; font-size:.9rem; }
+    .h-icon {
+      width:24px; height:24px; border-radius:999px;
+      background:radial-gradient(circle at 30% 0,#fff9d7,#ffbe6b);
+      box-shadow:0 8px 18px rgba(255,190,107,.8);
+    }
+    .h-icon.n { background:radial-gradient(circle at 30% 0,#fefbff,#b3a7ff); box-shadow:0 8px 18px rgba(178,165,255,.85); }
+    .h-text { font-size:.7rem; color:var(--text-soft); }
+    .indexes {
+      border-radius:18px; padding:9px 11px;
+      background:var(--panel-soft);
+      border:1px solid var(--border);
+      box-shadow:0 16px 38px rgba(0,0,0,.95);
+      display:flex; flex-direction:column; gap:7px;
+    }
+    .idx-row {
+      display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1.1fr);
+      gap:4px; padding:5px 0;
+      border-bottom:1px dashed rgba(131,148,228,.4);
+      font-size:.78rem;
+    }
+    .idx-row:last-child { border-bottom:none; }
+    .idx-name { color:var(--text-soft); }
+    .idx-bar-wrap { display:flex; align-items:center; gap:6px; }
+    .idx-bar {
+      flex:1; height:6px; border-radius:999px;
+      background:rgba(24,34,84,.95); overflow:hidden;
+    }
+    .idx-fill {
+      height:100%; border-radius:inherit;
+      background:linear-gradient(90deg,#4fd18a,#ffd36b,#ff6b81);
+      transform-origin:left; transform:scaleX(.5);
+    }
+    .idx-label { font-size:.7rem; }
+    .idx-note { font-size:.74rem; color:var(--text-soft); }
+    /* right column */
+    .col-right { display:grid; grid-template-rows:minmax(0,1.5fr) auto; gap:8px; }
+    .future {
+      border-radius:18px; padding:9px 11px;
+      background:radial-gradient(circle at 0 0,rgba(255,255,255,.12),transparent 60%),var(--panel);
+      border:1px solid var(--border);
+      box-shadow:0 20px 55px rgba(0,0,0,.95);
+      display:flex; flex-direction:column;
+    }
+    .future-list { margin-top:6px; display:flex; flex-direction:column; gap:7px; overflow-y:auto; }
+    .future-list::-webkit-scrollbar { width:4px; }
+    .future-list::-webkit-scrollbar-thumb { background:rgba(142,160,255,.8); border-radius:999px; }
+    .f-row {
+      display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1.1fr) minmax(0,1fr);
+      gap:6px; align-items:center;
+      border-radius:13px; padding:7px 8px;
+      background:rgba(10,15,48,.96);
+      border:1px solid rgba(151,170,255,.42);
+      font-size:.78rem;
+    }
+    .f-row:first-child { background:linear-gradient(120deg,rgba(137,170,255,.35),rgba(246,180,255,.2)); border-color:rgba(227,238,255,.95); }
+    .f-day { font-weight:500; }
+    .f-date { font-size:.7rem; color:var(--text-soft); }
+    .f-rain {
+      justify-self:center; padding:3px 7px; border-radius:999px;
+      border:1px solid rgba(124,190,255,.72);
+      background:rgba(18,44,77,.96); display:inline-flex; align-items:center; gap:4px;
+      font-size:.7rem;
+    }
+    .f-dot { width:7px; height:7px; border-radius:999px; background:var(--accent2); box-shadow:0 0 10px rgba(79,212,255,.9); }
+    .f-temp { text-align:right; font-size:.82rem; }
+    .insights {
+      border-radius:18px; padding:9px 11px;
+      background:var(--panel-soft);
+      border:1px solid var(--border);
+      box-shadow:0 18px 50px rgba(0,0,0,.95);
+      display:grid; grid-template-columns:minmax(0,1.6fr) minmax(0,1.2fr); gap:8px;
+    }
+    .chart-block { display:flex; flex-direction:column; gap:5px; }
+    .chart-title { font-size:.86rem; font-weight:500; }
+    .chart-cap { font-size:.75rem; color:var(--text-soft); }
+    .chart-wrap {
+      margin-top:3px; border-radius:13px;
+      border:1px solid rgba(144,163,255,.5);
+      background:radial-gradient(circle at 0 0,rgba(255,255,255,.06),transparent 60%),rgba(9,14,48,.96);
+      padding:7px 9px;
+    }
+    .chart-svg { width:100%; height:78px; }
+    .axis { stroke:rgba(153,170,255,.35); stroke-width:.6; }
+    .line { fill:none; stroke:url(#gTemp); stroke-width:2.1; }
+    .area { fill:url(#gArea); opacity:.9; }
+    .dot { fill:#fff; stroke:#7e8bff; stroke-width:1.3; }
+    .legend { margin-top:4px; display:flex; justify-content:space-between; font-size:.72rem; color:var(--text-soft); }
+    .aq-block { display:flex; flex-direction:column; gap:6px; }
+    .aq-pill {
+      padding:5px 8px; border-radius:12px;
+      border:1px solid rgba(182,237,198,.9);
+      background:rgba(17,76,41,.96);
+      font-size:.78rem; display:inline-flex; align-items:center; gap:6px;
+    }
+    .aq-bubble {
+      width:18px; height:18px; border-radius:999px;
+      background:radial-gradient(circle at 30% 0,#e6ffe6,#4fd18a);
+      box-shadow:0 0 18px rgba(79,209,138,.9);
+    }
+    .aq-metrics { margin-top:2px; display:grid; gap:3px; font-size:.74rem; }
+    .aq-row { display:flex; justify-content:space-between; color:var(--text-soft); }
+    .aq-val { color:#e3ffe9; font-weight:500; }
+    .aq-note { font-size:.7rem; color:var(--text-soft); }
+    .credit {
+      position:absolute; right:14px; bottom:9px;
+      font-size:.7rem; text-transform:uppercase; letter-spacing:.14em;
+      color:rgba(214,221,255,.58);
+    }
+    /* responsive */
+    @media (max-width:1100px){
+      .grid{grid-template-columns:minmax(0,1fr) minmax(0,2fr);}
+      .city-rail{display:none;}
+    }
+    @media (max-width:900px){
+      body{align-items:flex-start;}
+      .grid{grid-template-columns:minmax(0,1fr);}
+    }
+    @media (max-width:720px){
+      .app{border-radius:20px; padding:12px;}
+      .search-row{grid-template-columns:minmax(0,1fr);}
+      .lower{grid-template-columns:minmax(0,1fr);}
+      .insights{grid-template-columns:minmax(0,1fr);}
+    }
+    @media (max-width:540px){
+      .top{flex-direction:column; align-items:flex-start;}
+      .top-ctrl{align-self:stretch; justify-content:space-between;}
+      .kpi-row{grid-template-columns:repeat(2,minmax(0,1fr));}
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+<div class="app">
+  <div class="inner">
+    <header class="top">
+      <div class="brand">
+        <div class="orb"></div>
+        <div class="brand-meta">
+          <div class="brand-title">SKYPULSE COMMAND CENTER</div>
+          <div class="brand-sub">MULTI-CITY HYPERLOCAL WEATHER HUB</div>
         </div>
+      </div>
+      <div class="top-ctrl">
+        <nav class="tabs" id="tabs">
+          <button class="tab-btn active" data-view="overview"><span class="icon">◎</span><span>概览</span></button>
+          <button class="tab-btn" data-view="climate"><span class="icon">≈</span><span>气候趋势</span></button>
+          <button class="tab-btn" data-view="air"><span class="icon">◉</span><span>空气 · 健康</span></button>
+        </nav>
+        <div class="unit-switch" id="unitSwitch">
+          <button class="unit-btn active" data-unit="c">℃</button>
+          <button class="unit-btn" data-unit="f">℉</button>
+        </div>
+        <div class="status-pill" id="statusPill">
+          <span class="status-dot"></span>
+          <span id="statusText">Tokyo · 实时概览 · Demo</span>
+        </div>
+      </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+    <main class="grid">
+      <aside class="city-rail">
+        <div>
+          <div class="rail-title">监控城市</div>
+          <div class="rail-caption">点击切换城市，联动中间与右侧面板</div>
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
+        <div class="rail-list" id="cityList">
+          <button class="city-item active" data-key="tokyo">
+            <div class="city-head">
+              <span class="city-name">Tokyo</span>
+              <span class="city-badge">APAC</span>
             </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
+            <div class="city-meta">
+              <span class="city-temp" data-role="temp"></span>
+              <span class="city-sub">多云 · 舒适</span>
             </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
+          </button>
+          <button class="city-item" data-key="london">
+            <div class="city-head">
+              <span class="city-name">London</span>
+              <span class="city-badge">EMEA</span>
             </div>
+            <div class="city-meta">
+              <span class="city-temp" data-role="temp"></span>
+              <span class="city-sub">小雨 · 微凉</span>
+            </div>
+          </button>
+          <button class="city-item" data-key="la">
+            <div class="city-head">
+              <span class="city-name">Los Angeles</span>
+              <span class="city-badge">AMER</span>
+            </div>
+            <div class="city-meta">
+              <span class="city-temp" data-role="temp"></span>
+              <span class="city-sub">晴 · 干燥</span>
+            </div>
+          </button>
         </div>
-    </section>
+        <div class="city-add">＋ 可接后台 / 用户自选城市（演示按钮）</div>
+      </aside>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
+      <section class="col-center">
+        <div>
+          <div class="search-row">
+            <div class="input-wrap">
+              <input id="cityInput" class="city-input" placeholder="搜索或临时查看任何城市，例如：Osaka, Paris..." />
+              <span class="search-icon">⌕</span>
             </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
+            <button class="loc-card" id="locBtn">
+              <div>
+                <div class="loc-main" id="locMain">使用当前位置</div>
+                <div class="loc-sub" id="locSub">一键模拟定位 · 自动同步城市与昼夜主题</div>
+              </div>
+              <span class="loc-pin">◎</span>
+            </button>
+          </div>
+
+          <article class="hero">
+            <div class="hero-top">
+              <div class="hero-meta">
+                <div class="hero-city" id="cityName">Tokyo, Japan</div>
+                <div class="hero-time" id="timeText">本地时间 14:32 · 周五 · GMT+9</div>
+                <div class="hero-badges">
+                  <div class="pill"><span class="pill-dot"></span><span id="badgeComfort">体感舒适 · 无显著风险</span></div>
+                  <div class="pill">☂ <span id="badgeRain">未来 90 分钟无降水</span></div>
                 </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
+              </div>
+              <div class="hero-meta">
+                <div class="hero-time" id="updateText">更新于 14:30 · Demo API</div>
+              </div>
             </div>
+
+            <div class="hero-main">
+              <div class="hero-temp-wrap">
+                <div class="hero-temp-line">
+                  <span class="hero-temp" id="tempMain">27</span>
+                  <span class="hero-unit" id="unitMain">°C</span>
+                </div>
+                <div class="hero-cond" id="condText">部分多云 · 微风 2 级</div>
+                <div class="hero-feel" id="feelText">体感 29°C · 紫外线 5（中等）</div>
+              </div>
+              <div class="hero-visual">
+                <div class="sun"></div>
+                <div class="sun-ring"></div>
+                <div class="sun-cloud"></div>
+              </div>
+            </div>
+
+            <div class="kpi-row">
+              <div class="kpi">
+                <div class="kpi-label">风速</div>
+                <div class="kpi-main"><span class="kpi-val" id="windVal">12</span><span class="kpi-sub" id="windSub">km/h 东北风</span></div>
+              </div>
+              <div class="kpi">
+                <div class="kpi-label">湿度</div>
+                <div class="kpi-main"><span class="kpi-val" id="humVal">64</span><span class="kpi-sub">%</span></div>
+              </div>
+              <div class="kpi">
+                <div class="kpi-label">气压</div>
+                <div class="kpi-main"><span class="kpi-val" id="presVal">1013</span><span class="kpi-sub">hPa</span></div>
+              </div>
+              <div class="kpi">
+                <div class="kpi-label">能见度</div>
+                <div class="kpi-main"><span class="kpi-val" id="visVal">10</span><span class="kpi-sub" id="visSub">km · 极佳</span></div>
+              </div>
+            </div>
+          </article>
         </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
+        <div class="lower">
+          <section class="hourly">
+            <div class="card-head">
+              <div>
+                <div class="card-title">小时级趋势</div>
+                <div class="card-cap">温度变化 · 适合临近决策与运营排班</div>
+              </div>
+              <div class="chip-row" id="dayChips">
+                <button class="chip active" data-day="0">今天</button>
+                <button class="chip" data-day="1">明天</button>
+                <button class="chip" data-day="2">后天</button>
+              </div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
+            <div class="hour-strip" id="hourStrip"></div>
+          </section>
+
+          <aside class="indexes">
+            <div class="card-head">
+              <div>
+                <div class="card-title">出行 · 健康指数</div>
+                <div class="card-cap" id="idxSummary">适合步行与户外活动 · 轻薄外套即可</div>
+              </div>
             </div>
+            <div class="idx-row">
+              <span class="idx-name">舒适度</span>
+              <div class="idx-bar-wrap">
+                <div class="idx-bar"><div class="idx-fill" id="idxComfort"></div></div>
+                <span class="idx-label" id="idxComfortText">良好</span>
+              </div>
+            </div>
+            <div class="idx-row">
+              <span class="idx-name">紫外线</span>
+              <div class="idx-bar-wrap">
+                <div class="idx-bar"><div class="idx-fill" id="idxUV"></div></div>
+                <span class="idx-label" id="idxUVText">中等</span>
+              </div>
+            </div>
+            <div class="idx-row">
+              <span class="idx-name">通勤顺畅</span>
+              <div class="idx-bar-wrap">
+                <div class="idx-bar"><div class="idx-fill" id="idxCommute"></div></div>
+                <span class="idx-label" id="idxCommuteText">顺畅</span>
+              </div>
+            </div>
+            <div class="idx-row">
+              <span class="idx-name">过敏风险</span>
+              <div class="idx-bar-wrap">
+                <div class="idx-bar"><div class="idx-fill" id="idxAllergy"></div></div>
+                <span class="idx-label" id="idxAllergyText">较低</span>
+              </div>
+            </div>
+            <div class="idx-note">当前为示例逻辑，接入真实天气服务后可根据业务规则配置提醒与阈值。</div>
+          </aside>
         </div>
-    </footer>
+      </section>
 
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
+      <aside class="col-right">
+        <section class="future">
+          <div class="card-head">
+            <div>
+              <div class="card-title">未来 7 日预报</div>
+              <div class="card-cap">适合做运营排期、活动规划与能耗预估</div>
+            </div>
+          </div>
+          <div class="future-list" id="futureList"></div>
+        </section>
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
+        <section class="insights">
+          <div class="chart-block">
+            <div class="chart-title">一周温度走势</div>
+            <div class="chart-cap">简易曲线图，可进一步扩展为多维对比（如去年同期 / 其他城市）</div>
+            <div class="chart-wrap">
+              <svg class="chart-svg" viewBox="0 0 260 80" preserveAspectRatio="none" id="tempChart">
+                <defs>
+                  <linearGradient id="gTemp" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#4fd4ff"/>
+                    <stop offset="50%" stop-color="#7e8bff"/>
+                    <stop offset="100%" stop-color="#ffb86c"/>
+                  </linearGradient>
+                  <linearGradient id="gArea" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="rgba(126,139,255,0.8)"/>
+                    <stop offset="100%" stop-color="rgba(5,8,22,0.1)"/>
+                  </linearGradient>
+                </defs>
+                <line class="axis" x1="0" y1="76" x2="260" y2="76"></line>
+                <line class="axis" x1="0" y1="8" x2="0" y2="76"></line>
+              </svg>
+              <div class="legend">
+                <span id="legendRange">高温区间：24°C - 29°C</span>
+                <span id="legendHint">提示：周一略降温，早晚活动更舒适</span>
+              </div>
+            </div>
+          </div>
+          <div class="aq-block">
+            <div class="chart-title">空气质量概览</div>
+            <div class="aq-pill" id="aqPill">
+              <span class="aq-bubble"></span>
+              <span>空气 良 · AQI 42</span>
+            </div>
+            <div class="aq-metrics">
+              <div class="aq-row"><span>PM₂₅</span><span class="aq-val" id="pm25">18 μg/m³</span></div>
+              <div class="aq-row"><span>PM₁₀</span><span class="aq-val" id="pm10">26 μg/m³</span></div>
+              <div class="aq-row"><span>臭氧 O₃</span><span class="aq-val" id="o3">63 μg/m³</span></div>
+              <div class="aq-row"><span>NO₂</span><span class="aq-val" id="no2">21 μg/m³</span></div>
+            </div>
+            <div class="aq-note">这里使用静态示例值，接入真实 AQI 服务后可实现企业级空气质量监控与告警。</div>
+          </div>
+        </section>
+      </aside>
+    </main>
+  </div>
+  <div class="credit">Designed · SkyPulse Studio</div>
+</div>
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
+<script>
+const state = {
+  unit: 'c',
+  view: 'overview',
+  activeCity: 'tokyo',
+  activeDay: 0,
+  cities: {
+    tokyo: {
+      name: 'Tokyo, Japan',
+      nameShort: 'Tokyo',
+      tz: 'GMT+9',
+      theme: 'day',
+      current: {
+        temp: 27, feels: 29, cond: '部分多云 · 微风 2 级',
+        humidity: 64, pressure: 1013,
+        wind: 12, windDirCN: '东北风 2 级', windDirEN: 'NE breeze',
+        visibility: 10,
+        uv: 5,
+        timeLabel: '本地时间 14:32 · 周五 · GMT+9',
+        updateLabel: '更新于 14:30 · Demo API',
+        comfortBadge: '体感舒适 · 无显著风险',
+        rainBadge: '未来 90 分钟无降水'
+      },
+      hourly: [
+        [
+          { t:'现在', temp:27, txt:'多云', night:false },
+          { t:'15:00', temp:28, txt:'晴间多云', night:false },
+          { t:'16:00', temp:27, txt:'阳光稳定', night:false },
+          { t:'17:00', temp:25, txt:'傍晚微风', night:false },
+          { t:'18:00', temp:23, txt:'日落时分', night:true },
+          { t:'19:00', temp:22, txt:'晚间通透', night:true },
+          { t:'20:00', temp:21, txt:'夜间舒适', night:true }
+        ],
+        [
+          { t:'08:00', temp:23, txt:'清晨晴朗', night:false },
+          { t:'11:00', temp:27, txt:'紫外线偏高', night:false },
+          { t:'14:00', temp:29, txt:'略感闷热', night:false },
+          { t:'17:00', temp:26, txt:'转多云', night:false },
+          { t:'20:00', temp:22, txt:'晚间舒适', night:true }
+        ],
+        [
+          { t:'08:00', temp:21, txt:'清晨微凉', night:false },
+          { t:'11:00', temp:25, txt:'薄云', night:false },
+          { t:'14:00', temp:26, txt:'体感舒适', night:false },
+          { t:'17:00', temp:24, txt:'微风', night:false },
+          { t:'20:00', temp:21, txt:'云层稍多', night:true }
+        ]
+      ],
+      future: [
+        { day:'今天', date:'周五 · 11/14', max:28, min:21, rain:10, txt:'多云转晴' },
+        { day:'明天', date:'周六 · 11/15', max:29, min:22, rain:5, txt:'晴朗偏热' },
+        { day:'周日', date:'周日 · 11/16', max:27, min:20, rain:12, txt:'温度舒适' },
+        { day:'周一', date:'周一 · 11/17', max:24, min:18, rain:40, txt:'短时小雨' },
+        { day:'周二', date:'周二 · 11/18', max:23, min:17, rain:55, txt:'阵雨转阴' },
+        { day:'周三', date:'周三 · 11/19', max:25, min:18, rain:20, txt:'多云' },
+        { day:'周四', date:'周四 · 11/20', max:26, min:19, rain:8, txt:'少云' }
+      ],
+      idx: { comfort:.8, uv:.5, commute:.9, allergy:.3,
+        comfortText:'良好', uvText:'中等', commuteText:'顺畅', allergyText:'较低',
+        summary:'适合步行与户外活动 · 轻薄外套即可。' },
+      air: { aqi:42, level:'良', pm25:18, pm10:26, o3:63, no2:21 }
+    },
+    london: {
+      name: 'London, United Kingdom',
+      nameShort: 'London',
+      tz: 'GMT+0',
+      theme: 'night',
+      current: {
+        temp: 15, feels: 13, cond: '间歇小雨 · 微凉',
+        humidity: 78, pressure: 1008,
+        wind: 18, windDirCN: '西南风 3 级', windDirEN: 'SW breeze',
+        visibility: 8,
+        uv: 2,
+        timeLabel: '本地时间 06:12 · 周五 · GMT+0',
+        updateLabel: '更新于 06:10 · Demo API',
+        comfortBadge: '注意携带雨具 · 路面略湿滑',
+        rainBadge: '1 小时内有零星小雨'
+      },
+      hourly: [
+        [
+          { t:'现在', temp:15, txt:'小雨', night:true },
+          { t:'07:00', temp:15, txt:'毛毛雨', night:false },
+          { t:'09:00', temp:16, txt:'阴', night:false },
+          { t:'11:00', temp:17, txt:'多云', night:false },
+          { t:'13:00', temp:18, txt:'短暂放晴', night:false },
+          { t:'16:00', temp:17, txt:'转阴', night:false },
+          { t:'19:00', temp:14, txt:'夜间微雨', night:true }
+        ]
+      ],
+      future: [
+        { day:'今天', date:'周五 · 11/14', max:18, min:11, rain:60, txt:'小雨转多云' },
+        { day:'明天', date:'周六 · 11/15', max:17, min:10, rain:30, txt:'多云' },
+        { day:'周日', date:'周日 · 11/16', max:16, min:9, rain:20, txt:'阴为主' },
+        { day:'周一', date:'周一 · 11/17', max:15, min:8, rain:55, txt:'零星小雨' },
+        { day:'周二', date:'周二 · 11/18', max:14, min:7, rain:40, txt:'阴冷' },
+        { day:'周三', date:'周三 · 11/19', max:16, min:9, rain:25, txt:'多云' },
+        { day:'周四', date:'周四 · 11/20', max:17, min:10, rain:50, txt:'间歇小雨' }
+      ],
+      idx:{ comfort:.55, uv:.25, commute:.65, allergy:.4,
+        comfortText:'一般', uvText:'较弱', commuteText:'注意路滑', allergyText:'略有',
+        summary:'微凉有雨，建议携带雨具与薄外套，出行注意安全。' },
+      air:{ aqi:58, level:'良', pm25:22, pm10:31, o3:48, no2:37 }
+    },
+    la: {
+      name:'Los Angeles, USA',
+      nameShort:'Los Angeles',
+      tz:'GMT-8',
+      theme:'day',
+      current:{
+        temp:24, feels:23, cond:'晴朗 · 干燥',
+        humidity:38, pressure:1015,
+        wind:10, windDirCN:'西风 2 级', windDirEN:'W breeze',
+        visibility:16,
+        uv:7,
+        timeLabel:'本地时间 21:12 · 周四 · GMT-8',
+        updateLabel:'更新于 21:10 · Demo API',
+        comfortBadge:'白天紫外线偏强 · 建议防晒',
+        rainBadge:'未来数小时基本无降水'
+      },
+      hourly:[
+        [
+          { t:'现在', temp:24, txt:'晴朗', night:true },
+          { t:'22:00', temp:23, txt:'少云', night:true },
+          { t:'23:00', temp:22, txt:'夜间干燥', night:true },
+          { t:'00:00', temp:21, txt:'微风', night:true }
+        ]
+      ],
+      future:[
+        { day:'今天', date:'周四 · 11/13', max:27, min:19, rain:0, txt:'晴朗干燥' },
+        { day:'明天', date:'周五 · 11/14', max:28, min:19, rain:0, txt:'持续晴好' },
+        { day:'周六', date:'周六 · 11/15', max:29, min:20, rain:0, txt:'偏热' },
+        { day:'周日', date:'周日 · 11/16', max:28, min:19, rain:0, txt:'阳光充足' },
+        { day:'周一', date:'周一 · 11/17', max:26, min:18, rain:5, txt:'少云' },
+        { day:'周二', date:'周二 · 11/18', max:25, min:17, rain:5, txt:'海风明显' },
+        { day:'周三', date:'周三 · 11/19', max:26, min:18, rain:0, txt:'晴' }
+      ],
+      idx:{ comfort:.7, uv:.8, commute:.95, allergy:.2,
+        comfortText:'偏热', uvText:'偏强', commuteText:'非常顺畅', allergyText:'较低',
+        summary:'午后稍热，紫外线偏强，注意防晒与补水；路况整体通畅。' },
+      air:{ aqi:65, level:'中等', pm25:25, pm10:40, o3:80, no2:30 }
+    }
+  }
+};
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
+function c2f(c){ return Math.round(c*9/5+32); }
+function fmtTemp(c){
+  return state.unit==='c' ? c : c2f(c);
+}
+function unitLabel(){ return state.unit==='c' ? '°C' : '°F'; }
+
+// DOM
+const bodyEl = document.body;
+const tabsEl = document.getElementById('tabs');
+const unitSwitchEl = document.getElementById('unitSwitch');
+const statusTextEl = document.getElementById('statusText');
+const cityListEl = document.getElementById('cityList');
+const cityInputEl = document.getElementById('cityInput');
+const locBtnEl = document.getElementById('locBtn');
+const locMainEl = document.getElementById('locMain');
+const locSubEl = document.getElementById('locSub');
+
+const cityNameEl = document.getElementById('cityName');
+const timeTextEl = document.getElementById('timeText');
+const updateTextEl = document.getElementById('updateText');
+const badgeComfortEl = document.getElementById('badgeComfort');
+const badgeRainEl = document.getElementById('badgeRain');
+const tempMainEl = document.getElementById('tempMain');
+const unitMainEl = document.getElementById('unitMain');
+const condTextEl = document.getElementById('condText');
+const feelTextEl = document.getElementById('feelText');
+const windValEl = document.getElementById('windVal');
+const windSubEl = document.getElementById('windSub');
+const humValEl = document.getElementById('humVal');
+const presValEl = document.getElementById('presVal');
+const visValEl = document.getElementById('visVal');
+const visSubEl = document.getElementById('visSub');
+
+const dayChipsEl = document.getElementById('dayChips');
+const hourStripEl = document.getElementById('hourStrip');
+
+const idxSummaryEl = document.getElementById('idxSummary');
+const idxComfortEl = document.getElementById('idxComfort');
+const idxUVEl = document.getElementById('idxUV');
+const idxCommuteEl = document.getElementById('idxCommute');
+const idxAllergyEl = document.getElementById('idxAllergy');
+const idxComfortTextEl = document.getElementById('idxComfortText');
+const idxUVTextEl = document.getElementById('idxUVText');
+const idxCommuteTextEl = document.getElementById('idxCommuteText');
+const idxAllergyTextEl = document.getElementById('idxAllergyText');
+
+const futureListEl = document.getElementById('futureList');
+const tempChartEl = document.getElementById('tempChart');
+const legendRangeEl = document.getElementById('legendRange');
+const legendHintEl = document.getElementById('legendHint');
+
+const aqPillEl = document.getElementById('aqPill');
+const pm25El = document.getElementById('pm25');
+const pm10El = document.getElementById('pm10');
+const o3El = document.getElementById('o3');
+const no2El = document.getElementById('no2');
+
+function currentCity(){
+  return state.cities[state.activeCity];
+}
+
+function renderTop(){
+  const c = currentCity();
+  bodyEl.classList.toggle('theme-night', c.theme === 'night');
+  let viewText = '实时概览';
+  if(state.view==='climate') viewText='气候趋势视图';
+  if(state.view==='air') viewText='空气与健康视图';
+  statusTextEl.textContent = c.nameShort + ' · ' + viewText + ' · Demo';
+}
+
+function renderCityRail(){
+  const tiles = cityListEl.querySelectorAll('.city-item');
+  tiles.forEach(btn => {
+    const key = btn.dataset.key;
+    const data = state.cities[key];
+    const tempSpan = btn.querySelector('[data-role="temp"]');
+    if(data && tempSpan){
+      tempSpan.textContent = fmtTemp(data.current.temp) + unitLabel();
+    }
+    btn.classList.toggle('active', key === state.activeCity);
+  });
+}
+
+function renderCurrent(){
+  const c = currentCity();
+  const cur = c.current;
+  cityNameEl.textContent = c.name;
+  timeTextEl.textContent = cur.timeLabel;
+  updateTextEl.textContent = cur.updateLabel;
+  badgeComfortEl.textContent = cur.comfortBadge;
+  badgeRainEl.textContent = cur.rainBadge;
+
+  tempMainEl.textContent = fmtTemp(cur.temp);
+  unitMainEl.textContent = unitLabel();
+  condTextEl.textContent = cur.cond;
+
+  let uvTag = '中等';
+  if(cur.uv <= 2) uvTag = '较弱';
+  else if(cur.uv >= 6) uvTag = '偏强';
+  feelTextEl.textContent =
+    '体感 ' + fmtTemp(cur.feels) + unitLabel() + ' · 紫外线 ' + cur.uv + '（' + uvTag + '）';
+
+  windValEl.textContent = state.unit==='c' ? cur.wind : Math.round(cur.wind*0.621);
+  windSubEl.textContent = state.unit==='c' ? ('km/h ' + cur.windDirCN) : ('mph ' + cur.windDirEN);
+
+  humValEl.textContent = cur.humidity;
+  presValEl.textContent = cur.pressure;
+
+  visValEl.textContent = state.unit==='c' ? cur.visibility : Math.round(cur.visibility*0.621);
+  visSubEl.textContent = state.unit==='c' ? 'km · 极佳' : 'mi · excellent';
+}
+
+function renderHourly(){
+  const c = currentCity();
+  const list = c.hourly[state.activeDay] || c.hourly[0] || [];
+  hourStripEl.innerHTML = '';
+  list.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'h-card';
+    const top = document.createElement('div');
+    top.className = 'h-time';
+    top.textContent = item.t;
+    const icon = document.createElement('div');
+    icon.className = 'h-icon' + (item.night ? ' n' : '');
+    const temp = document.createElement('div');
+    temp.className = 'h-temp';
+    temp.textContent = fmtTemp(item.temp) + unitLabel();
+    const txt = document.createElement('div');
+    txt.className = 'h-text';
+    txt.textContent = item.txt;
+    div.appendChild(top);
+    div.appendChild(icon);
+    div.appendChild(temp);
+    div.appendChild(txt);
+    hourStripEl.appendChild(div);
+  });
+}
+
+function renderIdx(){
+  const c = currentCity();
+  const idx = c.idx;
+  idxComfortEl.style.transform = 'scaleX(' + idx.comfort + ')';
+  idxUVEl.style.transform = 'scaleX(' + idx.uv + ')';
+  idxCommuteEl.style.transform = 'scaleX(' + idx.commute + ')';
+  idxAllergyEl.style.transform = 'scaleX(' + idx.allergy + ')';
+  idxComfortTextEl.textContent = idx.comfortText;
+  idxUVTextEl.textContent = idx.uvText;
+  idxCommuteTextEl.textContent = idx.commuteText;
+  idxAllergyTextEl.textContent = idx.allergyText;
+  idxSummaryEl.textContent = idx.summary;
+}
+
+function renderFuture(){
+  const c = currentCity();
+  const list = c.future || [];
+  futureListEl.innerHTML = '';
+  list.forEach((d,i)=>{
+    const row = document.createElement('div');
+    row.className = 'f-row';
+    const left = document.createElement('div');
+    const day = document.createElement('div');
+    day.className = 'f-day';
+    day.textContent = d.day;
+    const date = document.createElement('div');
+    date.className = 'f-date';
+    date.textContent = d.date;
+    left.appendChild(day); left.appendChild(date);
+
+    const mid = document.createElement('div');
+    mid.className = 'f-rain';
+    const dot = document.createElement('span');
+    dot.className = 'f-dot';
+    const t = document.createElement('span');
+    t.textContent = d.rain + '% 降水';
+    mid.appendChild(dot); mid.appendChild(t);
+
+    const right = document.createElement('div');
+    right.className = 'f-temp';
+    right.innerHTML = '<span>' + fmtTemp(d.max) + unitLabel() + '</span>' +
+      '<span style="margin-left:6px; color:rgba(214,220,255,0.8);">' + fmtTemp(d.min) + unitLabel() + '</span>' +
+      '<div class="f-date" style="margin-top:2px;">' + d.txt + '</div>';
+
+    row.appendChild(left);
+    row.appendChild(mid);
+    row.appendChild(right);
+    if(i===0) row.classList.add('first');
+    futureListEl.appendChild(row);
+  });
+  // add highlight class to first row via style override
+  const firstRow = futureListEl.querySelector('.f-row');
+  if(firstRow) firstRow.classList.add('first');
+}
+
+function renderChart(){
+  const c = currentCity();
+  const data = c.future || [];
+  const old = tempChartEl.querySelectorAll('.line,.area,.dot');
+  old.forEach(el=>el.remove());
+  if(!data.length) return;
+
+  const maxs = data.map(d=>d.max);
+  const mins = data.map(d=>d.min);
+  const all = maxs.concat(mins);
+  const minVal = Math.min.apply(null, all);
+  const maxVal = Math.max.apply(null, all);
+  const w = 260, h = 80;
+  const padL=4, padR=4, padT=8, padB=6;
+  const uw = w - padL - padR;
+  const uh = h - padT - padB;
+  function sy(v){
+    const r = (v - minVal) / (maxVal - minVal || 1);
+    return padT + uh - r*uh;
+  }
+  const step = uw / (data.length-1 || 1);
+  const points = data.map((d,i)=>({ x: padL + step*i, y: sy(d.max) }));
+  let dpath = '';
+  points.forEach((p,i)=>{ dpath += (i===0?'M':'L')+p.x+' '+p.y+' '; });
+
+  let areaPath = dpath;
+  const last = points[points.length-1];
+  const first = points[0];
+  areaPath += 'L '+last.x+' '+(h-padB)+' L '+first.x+' '+(h-padB)+' Z';
+
+  const area = document.createElementNS('http://www.w3.org/2000/svg','path');
+  area.setAttribute('class','area');
+  area.setAttribute('d',areaPath);
+  tempChartEl.appendChild(area);
+
+  const line = document.createElementNS('http://www.w3.org/2000/svg','path');
+  line.setAttribute('class','line');
+  line.setAttribute('d',dpath);
+  tempChartEl.appendChild(line);
+
+  points.forEach(p=>{
+    const dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    dot.setAttribute('class','dot');
+    dot.setAttribute('cx',p.x);
+    dot.setAttribute('cy',p.y);
+    dot.setAttribute('r','2.2');
+    tempChartEl.appendChild(dot);
+  });
+
+  const globalMax = Math.max.apply(null, maxs);
+  const globalMin = Math.min.apply(null, mins);
+  legendRangeEl.textContent = '高温区间：' + fmtTemp(globalMin) + unitLabel() + ' - ' + fmtTemp(globalMax) + unitLabel();
+  legendHintEl.textContent = '提示：高温波动可用于指导活动排期与用电策略。';
+}
+
+function renderAir(){
+  const c = currentCity();
+  const a = c.air;
+  aqPillEl.innerHTML = '<span class="aq-bubble"></span><span>空气 ' + a.level + ' · AQI ' + a.aqi + '</span>';
+  pm25El.textContent = a.pm25 + ' μg/m³';
+  pm10El.textContent = a.pm10 + ' μg/m³';
+  o3El.textContent = a.o3 + ' μg/m³';
+  no2El.textContent = a.no2 + ' μg/m³';
+}
+
+function renderAll(){
+  renderTop();
+  renderCityRail();
+  renderCurrent();
+  renderHourly();
+  renderIdx();
+  renderFuture();
+  renderChart();
+  renderAir();
+}
+
+unitSwitchEl.addEventListener('click', e => {
+  const btn = e.target.closest('.unit-btn');
+  if(!btn) return;
+  const val = btn.dataset.unit;
+  if(!val || val===state.unit) return;
+  state.unit = val;
+  unitSwitchEl.querySelectorAll('.unit-btn').forEach(b=>b.classList.toggle('active', b===btn));
+  renderAll();
+});
+
+tabsEl.addEventListener('click', e => {
+  const btn = e.target.closest('.tab-btn');
+  if(!btn) return;
+  const view = btn.dataset.view;
+  if(!view || view===state.view) return;
+  state.view = view;
+  tabsEl.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b===btn));
+  renderTop();
+});
+
+cityListEl.addEventListener('click', e => {
+  const item = e.target.closest('.city-item');
+  if(!item) return;
+  const key = item.dataset.key;
+  if(!key || key===state.activeCity) return;
+  state.activeCity = key;
+  state.activeDay = 0;
+  const chips = dayChipsEl.querySelectorAll('.chip');
+  chips.forEach(ch=>ch.classList.toggle('active', ch.dataset.day==='0'));
+  locSubEl.textContent = '已切换到 ' + currentCity().nameShort + ' · 当前为演示数据';
+  renderAll();
+});
+
+dayChipsEl.addEventListener('click', e => {
+  const btn = e.target.closest('.chip');
+  if(!btn) return;
+  const idx = parseInt(btn.dataset.day || '0',10);
+  state.activeDay = idx;
+  dayChipsEl.querySelectorAll('.chip').forEach(ch=>ch.classList.toggle('active', ch===btn));
+  renderHourly();
+});
+
+cityInputEl.addEventListener('keydown', e => {
+  if(e.key!=='Enter') return;
+  const val = e.target.value.trim();
+  if(!val) return;
+  const c = currentCity();
+  c.name = val;
+  c.nameShort = val.split(',')[0];
+  c.current.comfortBadge = '自定义城市 · 当前为模板展示数据';
+  renderAll();
+});
+
+locBtnEl.addEventListener('click', () => {
+  locMainEl.textContent = '定位中...';
+  locSubEl.textContent = '模拟获取浏览器时区与经纬度';
+  statusTextEl.textContent = '模拟定位中 · 可接浏览器 geolocation 与天气 API';
+  setTimeout(()=>{
+    state.activeCity = 'tokyo';
+    state.activeDay = 0;
+    locMainEl.textContent = '当前位置（模拟）';
+    locSubEl.textContent = '已根据浏览器时区选定 Tokyo Area（演示）';
+    renderAll();
+  }, 900);
+});
+
+function init(){
+  renderAll();
+}
+init();
+</script>
 </body>
 </html>
